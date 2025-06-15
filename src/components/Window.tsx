@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { WindowConfig } from "./Scene";
@@ -10,6 +10,7 @@ interface WindowProps {
 const Window: React.FC<WindowProps> = ({ config }) => {
   const frameRef = useRef<THREE.Group>(null);
   const glassRef = useRef<THREE.Mesh>(null);
+  const [isModified, setIsModified] = useState(false);
 
   useFrame((state) => {
     if (glassRef.current) {
@@ -17,9 +18,30 @@ const Window: React.FC<WindowProps> = ({ config }) => {
       const time = state.clock.elapsedTime;
       if (glassRef.current.material instanceof THREE.MeshStandardMaterial) {
         glassRef.current.material.opacity = 0.3 + Math.sin(time * 2) * 0.1;
+        // Effet visuel lors de la modification
+        if (isModified) {
+          glassRef.current.material.color.setHex(0x87ceeb); // Couleur bleue
+          glassRef.current.material.opacity = 0.6;
+        } else {
+          glassRef.current.material.color.setHex(0x87ceeb); // Couleur par défaut
+          glassRef.current.material.opacity = 0.3;
+        }
       }
     }
   });
+
+  // Réinitialiser l'effet après 1 seconde
+  useEffect(() => {
+    if (isModified) {
+      const timer = setTimeout(() => setIsModified(false), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [isModified]);
+
+  // Mettre à jour l'effet lorsque la config change
+  useEffect(() => {
+    setIsModified(true);
+  }, [config]);
 
   return (
     <group ref={frameRef} position={[0, 0, -0.2]}>

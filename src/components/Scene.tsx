@@ -4,6 +4,7 @@ import { OrbitControls, Environment } from "@react-three/drei";
 import Wall from "./Wall";
 import Window from "./Window";
 import ControlPanel from "./ControlPanel";
+import * as THREE from "three";
 
 export interface WindowConfig {
   width: number;
@@ -31,8 +32,8 @@ const Scene: React.FC = () => {
         position={[10, 10, 5]}
         intensity={1}
         castShadow
-        shadow-mapSize-width={2048}
-        shadow-mapSize-height={2048}
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
         shadow-camera-far={50}
         shadow-camera-left={-10}
         shadow-camera-right={10}
