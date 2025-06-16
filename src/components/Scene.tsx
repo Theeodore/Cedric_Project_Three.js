@@ -4,12 +4,14 @@ import { OrbitControls, Environment } from "@react-three/drei";
 import Wall from "./Wall";
 import Window from "./Window";
 import ControlPanel from "./ControlPanel";
+import MaterialPanel from "./MaterialPanel";
 import * as THREE from "three";
 
 export interface WindowConfig {
   width: number;
   height: number;
   depth: number;
+  material: "metal" | "wood" | "brick";
 }
 
 const Scene: React.FC = () => {
@@ -17,6 +19,7 @@ const Scene: React.FC = () => {
     width: 2,
     height: 1.5,
     depth: 0.15,
+    material: "metal",
   });
   const [isDragging, setIsDragging] = useState(false);
 
@@ -54,6 +57,12 @@ const Scene: React.FC = () => {
       <Wall />
       <Window config={windowConfig} />
       <ControlPanel
+        config={windowConfig}
+        onConfigChange={setWindowConfig}
+        isDragging={isDragging}
+        setIsDragging={setIsDragging}
+      />
+      <MaterialPanel
         config={windowConfig}
         onConfigChange={setWindowConfig}
         isDragging={isDragging}
