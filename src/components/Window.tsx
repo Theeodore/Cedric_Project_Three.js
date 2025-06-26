@@ -29,7 +29,6 @@ const Window: React.FC<WindowProps> = ({ config }) => {
     });
     setGlassMaterial(newGlassMaterial);
 
-    // Nettoyage : dispose du matériau précédent lors du démontage ou de la mise à jour
     return () => {
       if (glassMaterial) {
         glassMaterial.dispose();
@@ -120,7 +119,7 @@ const Window: React.FC<WindowProps> = ({ config }) => {
         glassRef.current.material.map = null;
         glassRef.current.material.normalMap = null;
         glassRef.current.material.roughnessMap = null;
-        glassRef.current.material.needsUpdate = true; // Important pour forcer la mise à jour
+        glassRef.current.material.needsUpdate = true;
       }
     }
   });

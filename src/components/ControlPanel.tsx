@@ -38,7 +38,7 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
     event.stopPropagation();
     const deltaX = event.clientX - dragStartX;
     const sensitivity = 2; // Facteur de sensibilité
-    const deltaValue = (deltaX / window.innerWidth) * 2 * sensitivity; // Ajuste la sensibilité ici
+    const deltaValue = (deltaX / window.innerWidth) * 2 * sensitivity;
     let newValue = dragStartValue + deltaValue;
     newValue = Math.max(0, Math.min(1, newValue)); // Clamp entre 0 et 1
     let newConfig = { ...config };
@@ -66,9 +66,9 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
     setDragStartX(event.clientX);
     let startValue;
     if (paramKey === "depth") {
-      startValue = (value - 0.05) / 0.4; // Normalise pour Depth (0.05 à 0.45)
+      startValue = (value - 0.05) / 0.4;
     } else {
-      startValue = (value - 0.5) / 3; // Normalise pour Width et Height
+      startValue = (value - 0.5) / 3; //
     }
     setDragStartValue(startValue);
   };
