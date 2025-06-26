@@ -38,7 +38,7 @@ Ce projet est une application web React utilisant Three.js pour créer une scèn
    npm run dev
    ```
 
-4. Ouvre ton navigateur à l'adresse : `http://localhost:5173`
+4. Ouvre ton navigateur à l'adresse : `http://localhost:3000`
 
 ## Utilisation
 
